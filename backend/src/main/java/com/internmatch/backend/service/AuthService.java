@@ -1,5 +1,5 @@
 package com.internmatch.backend.service;
-
+import com.internmatch.backend.dto.ApiResponse;
 import com.internmatch.backend.dto.AuthResponse;
 import com.internmatch.backend.dto.RegisterRequest;
 import com.internmatch.backend.entity.Role;
@@ -16,10 +16,14 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthResponse register(RegisterRequest request) {
+    public ApiResponse<Object> register(RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            return new AuthResponse("Email already exists");
+            return new ApiResponse<>(
+        false,
+        "Email already exists",
+        null
+);
         }
 
         User user = User.builder()
@@ -31,6 +35,10 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return new AuthResponse("Registration Successful");
+        return new ApiResponse<>(
+        true,
+        "Registration Successful",
+        null
+);
     }
 }
