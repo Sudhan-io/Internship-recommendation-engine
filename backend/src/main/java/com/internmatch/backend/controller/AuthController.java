@@ -5,6 +5,7 @@ import com.internmatch.backend.dto.RegisterRequest;
 import com.internmatch.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import com.internmatch.backend.dto.LoginRequest;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,4 +19,10 @@ public class AuthController {
         @Valid @RequestBody RegisterRequest request) {
         return authService.register(request);
     }
+    @PostMapping("/login")
+public ApiResponse<Object> login(
+        @Valid @RequestBody LoginRequest request
+) {
+    return authService.login(request);
+}
 }
