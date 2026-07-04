@@ -1,0 +1,11 @@
+title,company_name,description,location,work_type,experience_level,skills,apply_url
+Software Engineer Intern,Google LLC,<p>Work with Google's search team using <b>Python</b> and <b>C++</b>.</p>,Mountain View CA,Hybrid,Internship,"python, C++",https://careers.google.com/jobs/1
+Data Analyst Intern,Amazon Inc.,Learn big data analytics using SQL and Python.,Seattle WA,Remote,Internship,"SQL, Python",https://careers.amazon.com/jobs/2
+Associate Frontend Developer,Facebook,Build user interfaces with React and JavaScript.,Menlo Park CA,Onsite,Entry level,"React, JavaScript",https://careers.meta.com/jobs/3
+Full Stack Trainee,Microsoft Corporation,Develop enterprise apps using Spring Boot and SQL.,Redmond WA,Remote,Internship,"Spring Boot, SQL",https://careers.microsoft.com/jobs/4
+Senior Software Architect,Netflix Inc.,Lead architectural design for streaming engine.,Los Gatos CA,Hybrid,Mid-Senior level,"Java, AWS",https://careers.netflix.com/jobs/5
+Software Engineer Intern,Google LLC,<p>Work with Google's search team using <b>Python</b> and <b>C++</b>.</p>,Mountain View CA,Hybrid,Internship,"python, C++",https://careers.google.com/jobs/1
+Data Scientist Graduate,Apple,Work on core machine learning models with PyTorch.,Cupertino CA,Onsite,Entry level,"PyTorch, Python",https://careers.apple.com/jobs/6
+Cloud Engineer Intern,Netflix Inc.,Deploy microservices to AWS cloud.,Los Gatos CA,Remote,Internship,"AWS, Docker",https://careers.netflix.com/jobs/7
+Invalid Job,,Missing company name and description.,,Onsite,Internship,Python,
+Java Developer Associate,Amazon Inc.,Build scalable backend with Java and Spring Boot.,Seattle WA,Hybrid,Entry level,"Java, Spring Boot",https://careers.amazon.com/jobs/8

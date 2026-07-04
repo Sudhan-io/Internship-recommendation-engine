@@ -1,0 +1,3 @@
+from recommendation.explanation.models import RecommendationExplanation
+from recommendation.explanation.service import ExplainableRecommendationService
+from recommendation.explanation.formatter import ExplanationFormatter

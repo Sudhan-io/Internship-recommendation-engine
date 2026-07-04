@@ -1,0 +1,2 @@
+from normalization.canonical_dictionary import CanonicalDictionary
+from normalization.normalizer import ResumeNormalizer

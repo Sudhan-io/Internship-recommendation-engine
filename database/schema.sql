@@ -66,7 +66,15 @@ CREATE TABLE resumes (
 
     file_path VARCHAR(500) NOT NULL,
 
+    file_size BIGINT,
+
+    mime_type VARCHAR(100),
+
     extracted_text LONGTEXT,
+
+    processing_status VARCHAR(50) DEFAULT 'UPLOADED',
+
+    embedding_generated BOOLEAN DEFAULT FALSE,
 
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
@@ -109,6 +117,8 @@ CREATE TABLE internships (
     description TEXT,
 
     eligibility TEXT,
+
+    apply_url VARCHAR(255),
 
     application_deadline DATE,
 

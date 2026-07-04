@@ -19,6 +19,10 @@ public class AuthController {
         @Valid @RequestBody RegisterRequest request) {
         return authService.register(request);
     }
+    @GetMapping("/test")
+public String test() {
+    return "JWT Authentication Working";
+}
     @PostMapping("/login")
 public ApiResponse<Object> login(
         @Valid @RequestBody LoginRequest request

@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -13,39 +15,59 @@ import ManageInternships from "./pages/admin/ManageInternships";
 
 function App() {
   return (
-    <Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={<h1>AI Internship Recommendation Engine</h1>} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="/login" element={<Login />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="/register" element={<Register />} />
+        <Route
+          path="/recommendations"
+          element={
+            <ProtectedRoute>
+              <Recommendations />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/applications"
+          element={
+            <ProtectedRoute>
+              <Applications />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
 
-      <Route
-        path="/recommendations"
-        element={<Recommendations />}
-      />
-
-      <Route
-        path="/applications"
-        element={<Applications />}
-      />
-
-      <Route
-        path="/admin"
-        element={<AdminDashboard />}
-      />
-
-      <Route
-        path="/admin/internships"
-        element={<ManageInternships />}
-      />
-
-    </Routes>
+        <Route
+          path="/admin/internships"
+          element={<ManageInternships />}
+        />
+      </Routes>
+    </AuthProvider>
   );
 }
 
