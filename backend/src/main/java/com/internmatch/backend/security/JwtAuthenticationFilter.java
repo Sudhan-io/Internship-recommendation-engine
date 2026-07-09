@@ -17,8 +17,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
@@ -42,15 +45,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String email;
 
-try {
-    email = jwtService.extractUsername(token);
-} catch (Exception e) {
-    e.printStackTrace();
-    filterChain.doFilter(request, response);
-    return;
-}
-        System.out.println("JWT Token: " + token);
-        System.out.println("Extracted Email: " + email);
+        try {
+            email = jwtService.extractUsername(token);
+        } catch (Exception e) {
+            log.warn("Failed to extract username from JWT token: {}", e.getMessage());
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        log.debug("Extracted Email from JWT: {}", email);
 
         if (email != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -58,8 +61,7 @@ try {
             User user = userRepository.findByEmail(email).orElse(null);
 
             if (user != null && jwtService.isTokenValid(token, user)) {
-                System.out.println("User Found: " + user.getEmail());
-                System.out.println("JWT Valid");
+                log.debug("JWT valid for user: {}", user.getEmail());
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
@@ -70,7 +72,7 @@ try {
 
                 authentication.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
-                );
+                        );
 
                 SecurityContextHolder.getContext()
                         .setAuthentication(authentication);

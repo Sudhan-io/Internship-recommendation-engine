@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: internmatch-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "Sudh@007"
+      MYSQL_DATABASE: "internship_recommendation_engine"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pSudh@007"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ai-service:
+    build:
+      context: ./ai-service
+    container_name: internmatch-ai
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+
+  backend:
+    build:
+      context: ./backend
+    container_name: internmatch-backend
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_URL=jdbc:mysql://db:3306/internship_recommendation_engine?useSSL=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+      - DB_USERNAME=root
+      - DB_PASSWORD=Sudh@007
+      - AI_SERVICE_URL=http://ai-service:8000
+      - JWT_SECRET=internmatch_super_secret_key_change_this_in_production_2026
+      - JWT_EXPIRATION=86400000
+    depends_on:
+      db:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: internmatch-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

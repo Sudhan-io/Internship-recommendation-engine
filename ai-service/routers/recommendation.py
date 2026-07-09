@@ -65,7 +65,19 @@ def generate_recommendations(req: RecommendationRequest):
             iid = item.get("internship_id") or item.get("internshipId")
             internship_tuples.append((iid, item))
             
-        internship_embs = embedding_service.generate_internships_batch(internship_tuples)
+        # Optimize embedding generation by retrieving already cached embeddings
+        internship_embs = []
+        uncached_tuples = []
+        for iid, item in internship_tuples:
+            emb = embedding_service.repository.get_internship_embedding(iid)
+            if emb:
+                internship_embs.append(emb)
+            else:
+                uncached_tuples.append((iid, item))
+                
+        if uncached_tuples:
+            new_embs = embedding_service.generate_internships_batch(uncached_tuples)
+            internship_embs.extend(new_embs)
         
         similarity_matches = similarity_service.compare_resume_to_internships(
             resume_emb, internship_embs, top_k=100

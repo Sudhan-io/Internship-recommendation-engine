@@ -44,12 +44,29 @@ coverage/
 Thumbs.db
 
 # ==========================
-# Logs
+# Logs & Uploads
 # ==========================
 *.log
+logs/
+uploads/
 
 # ==========================
 # Temporary
 # ==========================
 temp/
 tmp/
+
+# ==========================
+# Python / FastAPI
+# ==========================
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/

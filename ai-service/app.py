@@ -35,3 +35,36 @@ def health_check():
 @app.on_event("startup")
 def startup_event():
     print("AI Service started successfully.")
+    try:
+        from dataset.pipeline import IngestionPipeline
+        import mysql.connector
+        from routers.recommendation import embedding_service
+        
+        print("Pre-warming internship embeddings cache on startup...")
+        pipeline = IngestionPipeline()
+        conn = mysql.connector.connect(**pipeline.db_config)
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM internships")
+        internships = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        
+        if internships:
+            internship_tuples = []
+            for item in internships:
+                iid = item.get("internship_id") or item.get("internshipId")
+                internship_tuples.append((iid, item))
+                
+            uncached = []
+            for iid, item in internship_tuples:
+                if not embedding_service.repository.get_internship_embedding(iid):
+                    uncached.append((iid, item))
+                    
+            if uncached:
+                print(f"Generating embeddings for {len(uncached)} internships on startup...")
+                embedding_service.generate_internships_batch(uncached)
+                print("Cache pre-warmed successfully!")
+            else:
+                print("All internship embeddings already cached.")
+    except Exception as e:
+        print(f"Failed to pre-warm cache: {e}")

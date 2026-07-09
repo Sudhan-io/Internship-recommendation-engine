@@ -6,11 +6,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleException(Exception ex) {
+        log.error("Unexpected exception occurred: {}", ex.getMessage(), ex);
 
         ApiResponse<Object> response =
                 new ApiResponse<>(
@@ -60,6 +64,19 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(response);
+    }
+
+    @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiResponse<Object>> handleMaxUploadSizeExceeded(org.springframework.web.multipart.MaxUploadSizeExceededException ex) {
+        log.warn("Upload failed: File size exceeds the maximum limit: {}", ex.getMessage());
+        ApiResponse<Object> response = new ApiResponse<>(
+                false,
+                "File size exceeds the maximum limit of 5MB",
+                null
+        );
+        return ResponseEntity
+                .status(HttpStatus.PAYLOAD_TOO_LARGE)
                 .body(response);
     }
 }

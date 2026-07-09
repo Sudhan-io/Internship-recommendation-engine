@@ -22,25 +22,35 @@ class IngestionPipeline:
             "password": "Password",
             "database": "internship_recommendation_engine"
         }
+        
+        # Load .env file manually if it exists
         try:
             current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-            prop_path = os.path.join(current_dir, "backend", "src", "main", "resources", "application.properties")
-            if os.path.exists(prop_path):
-                with open(prop_path, "r", encoding="utf-8") as f:
+            env_path = os.path.join(current_dir, ".env")
+            if os.path.exists(env_path):
+                with open(env_path, "r", encoding="utf-8") as f:
                     for line in f:
-                        if "=" in line and not line.startswith("#"):
-                            key, val = line.strip().split("=", 1)
-                            if "spring.datasource.url" in key:
-                                match = re.search(r"//([^:/]+):?(\d*)/([^?]+)", val)
-                                if match:
-                                    config["host"] = match.group(1)
-                                    config["database"] = match.group(3)
-                            elif "spring.datasource.username" in key:
-                                config["user"] = val
-                            elif "spring.datasource.password" in key:
-                                config["password"] = val
+                        line = line.strip()
+                        if line and not line.startswith("#") and "=" in line:
+                            k, v = line.split("=", 1)
+                            os.environ[k.strip()] = v.strip()
         except Exception as e:
-            print(f"Warning: Failed to parse application.properties: {e}. Using default DB config.")
+            print(f"Warning: Failed to load .env file: {e}")
+
+        # Read environment variables directly with fallbacks
+        db_url = os.environ.get("DB_URL", "jdbc:mysql://localhost:3306/internship_recommendation_engine")
+        db_user = os.environ.get("DB_USERNAME", "root")
+        db_pass = os.environ.get("DB_PASSWORD", "Sudh@007")
+
+        # Parse DB_URL to get host and database name
+        match = re.search(r"//([^:/]+):?(\d*)/([^?/\s]+)", db_url)
+        if match:
+            config["host"] = match.group(1)
+            config["database"] = match.group(3)
+
+        config["user"] = db_user
+        config["password"] = db_pass
+
         return config
 
     def clean_html(self, text: str) -> str:

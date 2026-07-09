@@ -1,0 +1,152 @@
+[
+  {
+    "test_case": 1,
+    "name": "Alice Frontend Dev",
+    "dept": "Computer Science (Frontend UI)",
+    "resume_file": "resume_10_332ab1a2-6a10-469e-bae6-52b117a88c2a.pdf",
+    "recs_count": 10,
+    "top_recommendations": [
+      {
+        "title": "Full Stack Trainee",
+        "company": "Microsoft",
+        "score": 0.7928,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Java Developer Associate",
+        "company": "Amazon",
+        "score": 0.7287,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Backend Engineer Intern",
+        "company": "DevFlow Solutions",
+        "score": 0.6818,
+        "matched_skills": null,
+        "missing_skills": null
+      }
+    ]
+  },
+  {
+    "test_case": 2,
+    "name": "Bob Data Scientist",
+    "dept": "Data Science & AI",
+    "resume_file": "resume_10_336ae034-14e1-4652-a3df-8fdc423a291a.pdf",
+    "recs_count": 10,
+    "top_recommendations": [
+      {
+        "title": "Data Scientist Graduate",
+        "company": "Apple",
+        "score": 0.5903,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Analyst Intern",
+        "company": "Amazon",
+        "score": 0.5861,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Science Intern",
+        "company": "DataSolutions Ltd.",
+        "score": 0.5575,
+        "matched_skills": null,
+        "missing_skills": null
+      }
+    ]
+  },
+  {
+    "test_case": 3,
+    "name": "Charlie Cloud Ops",
+    "dept": "DevOps & Cloud Computing",
+    "resume_file": "resume_10_879b4f86-a725-4c07-8faa-544fabc58eb4.pdf",
+    "recs_count": 10,
+    "top_recommendations": [
+      {
+        "title": "Data Scientist Graduate",
+        "company": "Apple",
+        "score": 0.5903,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Analyst Intern",
+        "company": "Amazon",
+        "score": 0.5861,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Science Intern",
+        "company": "DataSolutions Ltd.",
+        "score": 0.5575,
+        "matched_skills": null,
+        "missing_skills": null
+      }
+    ]
+  },
+  {
+    "test_case": 4,
+    "name": "Diana Cyber Security",
+    "dept": "Cybersecurity & Networks",
+    "resume_file": "resume_11_07d15742-53e3-40a5-bcd1-427069df6c26.pdf",
+    "recs_count": 10,
+    "top_recommendations": [
+      {
+        "title": "Data Scientist Graduate",
+        "company": "Apple",
+        "score": 0.5903,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Analyst Intern",
+        "company": "Amazon",
+        "score": 0.5861,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Data Science Intern",
+        "company": "DataSolutions Ltd.",
+        "score": 0.5575,
+        "matched_skills": null,
+        "missing_skills": null
+      }
+    ]
+  },
+  {
+    "test_case": 5,
+    "name": "Ethan Systems Engineer",
+    "dept": "Computer Engineering (Backend)",
+    "resume_file": "resume_11_0b27a7d7-8251-4d14-bf8f-1937bb680f00.pdf",
+    "recs_count": 10,
+    "top_recommendations": [
+      {
+        "title": "Full Stack Trainee",
+        "company": "Microsoft",
+        "score": 0.7928,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Java Developer Associate",
+        "company": "Amazon",
+        "score": 0.7287,
+        "matched_skills": null,
+        "missing_skills": null
+      },
+      {
+        "title": "Backend Engineer Intern",
+        "company": "DevFlow Solutions",
+        "score": 0.6818,
+        "matched_skills": null,
+        "missing_skills": null
+      }
+    ]
+  }
+]

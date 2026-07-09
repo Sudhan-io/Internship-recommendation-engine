@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { LogOut, Compass } from "lucide-react";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
@@ -25,6 +26,7 @@ const Header = () => {
     <header style={styles.header}>
       <div style={styles.container}>
         <Link to="/dashboard" style={styles.logo}>
+          <Compass size={20} style={{ marginRight: 8, color: "#4f46e5" }} />
           <span style={styles.logoAccent}>Intern</span>Match
         </Link>
         <nav style={styles.nav}>
@@ -47,6 +49,7 @@ const Header = () => {
         <div style={styles.profile}>
           <span style={styles.userName}>{user.name}</span>
           <button onClick={handleLogout} style={styles.logoutBtn}>
+            <LogOut size={13} style={{ marginRight: 6 }} />
             Logout
           </button>
         </div>
@@ -58,11 +61,11 @@ const Header = () => {
 const styles = {
   header: {
     backgroundColor: "#ffffff",
-    borderBottom: "1px solid #e5e7eb",
+    borderBottom: "1px solid rgba(229, 231, 235, 0.8)",
     position: "sticky",
     top: 0,
     zIndex: 50,
-    boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.02)"
   },
   container: {
     maxWidth: 1200,
@@ -74,26 +77,28 @@ const styles = {
     justifyContent: "space-between"
   },
   logo: {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    color: "#1f2937",
+    display: "inline-flex",
+    alignItems: "center",
+    fontSize: "1.35rem",
+    fontWeight: 800,
+    color: "#111827",
     textDecoration: "none",
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.03em"
   },
   logoAccent: {
     color: "#4f46e5"
   },
   nav: {
     display: "flex",
-    gap: "1.5rem"
+    gap: "0.5rem"
   },
   navLink: {
     color: "#4b5563",
     textDecoration: "none",
-    fontWeight: 500,
-    fontSize: "0.95rem",
-    padding: "0.5rem 0.75rem",
-    borderRadius: "0.375rem",
+    fontWeight: 600,
+    fontSize: "0.9rem",
+    padding: "0.5rem 0.875rem",
+    borderRadius: "0.5rem",
     transition: "all 0.2s"
   },
   navLinkActive: {
@@ -103,22 +108,24 @@ const styles = {
   profile: {
     display: "flex",
     alignItems: "center",
-    gap: "1rem"
+    gap: "1.25rem"
   },
   userName: {
     color: "#374151",
-    fontSize: "0.9rem",
-    fontWeight: 500
+    fontSize: "0.875rem",
+    fontWeight: 600
   },
   logoutBtn: {
-    backgroundColor: "#f3f4f6",
-    color: "#374151",
-    border: "none",
-    padding: "0.5rem 1rem",
-    borderRadius: "0.375rem",
-    fontSize: "0.9rem",
-    fontWeight: 500,
+    backgroundColor: "#f9fafb",
+    color: "#4b5563",
+    border: "1px solid #e5e7eb",
+    padding: "0.5rem 0.875rem",
+    borderRadius: "0.5rem",
+    fontSize: "0.875rem",
+    fontWeight: 600,
     cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
     transition: "all 0.2s"
   }
 };

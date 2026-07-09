@@ -27,9 +27,10 @@ CREATE TABLE users (
 
 CREATE TABLE student_profiles (
 
-    profile_id INT AUTO_INCREMENT PRIMARY KEY,
+    profile_id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
     user_id INT NOT NULL UNIQUE,
+
 
     college_name VARCHAR(150) NOT NULL,
 
@@ -58,7 +59,7 @@ CREATE TABLE student_profiles (
 
 CREATE TABLE resumes (
 
-    resume_id INT AUTO_INCREMENT PRIMARY KEY,
+    resume_id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
     user_id INT NOT NULL,
 
@@ -100,7 +101,7 @@ CREATE TABLE skills (
 
 CREATE TABLE internships (
 
-    internship_id INT AUTO_INCREMENT PRIMARY KEY,
+    internship_id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
     title VARCHAR(150) NOT NULL,
 
@@ -133,7 +134,7 @@ CREATE TABLE internship_skills (
 
     internship_skill_id INT AUTO_INCREMENT PRIMARY KEY,
 
-    internship_id INT NOT NULL,
+    internship_id BIGINT NOT NULL,
 
     skill_id INT NOT NULL,
 
@@ -158,7 +159,7 @@ CREATE TABLE applications (
 
     user_id INT NOT NULL,
 
-    internship_id INT NOT NULL,
+    internship_id BIGINT NOT NULL,
 
     status ENUM('APPLIED','SHORTLISTED','REJECTED','ACCEPTED')
         DEFAULT 'APPLIED',
@@ -175,27 +176,39 @@ CREATE TABLE applications (
 
 );
 -- =============================================
+-- RECOMMENDATION BATCHES
+-- =============================================
+
+CREATE TABLE recommendation_batches (
+    batch_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    resume_id BIGINT NOT NULL,
+    model_name VARCHAR(255),
+    recommendation_count INT,
+    generated_at DATETIME(6),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (resume_id) REFERENCES resumes(resume_id) ON DELETE CASCADE
+);
+
+-- =============================================
 -- RECOMMENDATIONS
 -- =============================================
 
 CREATE TABLE recommendations (
-
     recommendation_id INT AUTO_INCREMENT PRIMARY KEY,
-
+    batch_id INT NOT NULL,
     user_id INT NOT NULL,
-
-    internship_id INT NOT NULL,
-
-    match_score DECIMAL(5,2) NOT NULL,
-
-    recommended_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (user_id)
-        REFERENCES users(user_id)
-        ON DELETE CASCADE,
-
-    FOREIGN KEY (internship_id)
-        REFERENCES internships(internship_id)
-        ON DELETE CASCADE
-
+    internship_id BIGINT NOT NULL,
+    final_score DOUBLE,
+    semantic_score DOUBLE,
+    skill_score DOUBLE,
+    education_score DOUBLE,
+    experience_score DOUBLE,
+    eligibility_score DOUBLE,
+    explanation_text TEXT,
+    matched_skills VARCHAR(255),
+    missing_skills VARCHAR(255),
+    FOREIGN KEY (batch_id) REFERENCES recommendation_batches(batch_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (internship_id) REFERENCES internships(internship_id) ON DELETE CASCADE
 );
