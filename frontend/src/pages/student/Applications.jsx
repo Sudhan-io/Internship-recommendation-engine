@@ -4,10 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, Building, CheckCircle2, Clock } from "lucide-react";
 
 const Applications = () => {
-  const mockApplications = [
-    { id: 1, title: "Software Engineer Intern", company: "Google", date: "2026-07-01", status: "Under Review" },
-    { id: 2, title: "Data Analyst Intern", company: "Amazon", date: "2026-06-25", status: "Applied" }
-  ];
+  const mockApplications = [];
 
   return (
     <div style={styles.page}>
@@ -22,43 +19,49 @@ const Applications = () => {
           <h2 style={styles.title}>Your Applications</h2>
           <p style={styles.subtitle}>Track the status of internships you've applied for.</p>
           
-          <div style={styles.list}>
-            {mockApplications.map((app, index) => (
-              <motion.div 
-                key={app.id} 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.3 }}
-                whileHover={{ x: 4, borderColor: "#c7d2fe" }}
-                style={styles.row}
-              >
-                <div>
-                  <h4 style={styles.jobTitle}>{app.title}</h4>
-                  <span style={styles.company}>
-                    <Building size={12} style={{ marginRight: 5, color: "#6b7280" }} />
-                    {app.company}
-                  </span>
-                </div>
-                <div style={styles.right}>
-                  <span style={styles.date}>
-                    <Calendar size={11} style={{ marginRight: 4 }} />
-                    Applied: {app.date}
-                  </span>
-                  <span style={{
-                    ...styles.status,
-                    ...(app.status === "Under Review" ? styles.statusReview : {})
-                  }}>
-                    {app.status === "Under Review" ? (
-                      <Clock size={11} style={{ marginRight: 4 }} />
-                    ) : (
-                      <CheckCircle2 size={11} style={{ marginRight: 4 }} />
-                    )}
-                    {app.status}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {mockApplications.length === 0 ? (
+            <div style={{ padding: "3rem", textAlign: "center", color: "#6b7280", backgroundColor: "#f9fafb", borderRadius: "0.75rem", border: "1px dashed #d1d5db" }}>
+              <p style={{ margin: 0 }}>You haven't applied to any internships yet.</p>
+            </div>
+          ) : (
+            <div style={styles.list}>
+              {mockApplications.map((app, index) => (
+                <motion.div 
+                  key={app.id} 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  whileHover={{ x: 4, borderColor: "#c7d2fe" }}
+                  style={styles.row}
+                >
+                  <div>
+                    <h4 style={styles.jobTitle}>{app.title}</h4>
+                    <span style={styles.company}>
+                      <Building size={12} style={{ marginRight: 5, color: "#6b7280" }} />
+                      {app.company}
+                    </span>
+                  </div>
+                  <div style={styles.right}>
+                    <span style={styles.date}>
+                      <Calendar size={11} style={{ marginRight: 4 }} />
+                      Applied: {app.date}
+                    </span>
+                    <span style={{
+                      ...styles.status,
+                      ...(app.status === "Under Review" ? styles.statusReview : {})
+                    }}>
+                      {app.status === "Under Review" ? (
+                        <Clock size={11} style={{ marginRight: 4 }} />
+                      ) : (
+                        <CheckCircle2 size={11} style={{ marginRight: 4 }} />
+                      )}
+                      {app.status}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </motion.div>
       </main>
     </div>
