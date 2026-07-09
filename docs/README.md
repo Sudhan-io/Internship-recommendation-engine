@@ -5,7 +5,6 @@ Welcome to the InternMatch documentation. The following guides provide comprehen
 ## Core Guides
 - [Installation Guide](INSTALLATION.md): Setup prerequisites, environment variables, and database seeding.
 - [Running Guide](RUNNING.md): Instructions for local development workflows and Docker Compose execution.
-- [Deployment Guide](DEPLOYMENT.md): Strategies for deploying the platform to VPS and managed PaaS providers.
 
 ## Technical References
 - [Architecture](ARCHITECTURE.md): High-level system diagrams and workflow explanations.
@@ -14,7 +13,6 @@ Welcome to the InternMatch documentation. The following guides provide comprehen
 
 ## Operations
 - [Troubleshooting](TROUBLESHOOTING.md): Solutions for common port, database, and dependency errors.
-- [Presentation Demo](DEMO.md): A recommended script for demonstrating the project to evaluators.
 - [Release Checklist](RELEASE_CHECKLIST.md): QA verification required before creating a new public release.
 
 ---
