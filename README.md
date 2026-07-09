@@ -12,6 +12,10 @@ A full-stack internship recommendation engine that automatically matches student
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+**[🌐 View Live Demo](https://internship-recommendation-engine-steel.vercel.app/)**
+
+> **Note on Live Demo:** The live deployment currently includes the React Frontend (Vercel), Spring Boot Backend (Render), and TiDB Serverless Database. The Python AI Microservice is intentionally excluded from the free-tier live demo because the PyTorch tensors and SentenceTransformer models require ~650MB of RAM to initialize, which exceeds the strict 512MB limits of free-tier cloud hosts. To test the full AI recommendation engine, please run the project locally using Docker Compose!
+
 ## 📖 What is this?
 Finding the right internship can often feel like throwing resumes into a void. Applicant Tracking Systems (ATS) typically rely on rigid keyword matching, meaning qualified candidates are frequently filtered out over minor terminology differences. 
 
