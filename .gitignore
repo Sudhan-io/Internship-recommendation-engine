@@ -72,3 +72,5 @@ htmlcov/
 .mypy_cache/
 # Raw Dataset
 ai-service/dataset/original/
+DEMO.md
+DEPLOYMENT.md
